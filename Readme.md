@@ -1,6 +1,6 @@
-# Shadowsock automatic installer
+# Shadowsocks automatic installer
 
-## ShadowsockR_installer
+## ShadowsocksR_installer
 OS: CentOS, Debian, Ubuntu
 
 RAM >= 128 MB
