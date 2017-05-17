@@ -102,7 +102,7 @@ install() {
 		fi 
 		# Set up firewall rules
 		echo "Set up firewall rules"
-		if [ $OS_VERSION -eq 7 ] && [ -n "$(command -v yum)" ]; then
+		if [ -n "$(command -v firewall-cmd)" ]; then
 			systemctl status firewalld > /dev/null 2>&1
 			if [ $? -eq 0 ]; then
 				firewall-cmd --permanent --zone=public --add-port=${PORT}/tcp
