@@ -141,7 +141,7 @@ EOF
 	"timeout":120,
 	"method":"${METHOD}",
 	"protocol":"${PROTO}",
-	"protocol_param":"",
+	"protocol_param":"${PROTO_PARAM}",
 	"obfs":"${OBFS}",
 	"obfs_param":"${OBFS_PARAM}",
 	"redirect":"",
@@ -321,10 +321,11 @@ elif test "$ERROR" != "yes" ; then
 			fi
 			done
 		}
-		test -z "${METHOD}" && METHOD="chacha20"
-		test -z "${PROTO}" && PROTO="auth_sha1_compatible"
-		test -z "${OBFS}" && OBFS="http_simple_compatible"
-		test -z "${OBFS_PARAM}" && test $(echo ${OBFS} |grep -i 'http_simple') && OBFS_PARAM="bing.com,microsoft.com,live.com,outlook.com"
+		test -z "${METHOD}" && METHOD="rc4-md5"
+		test -z "${PROTO}" && PROTO="origin"
+		test -z "${PROTO_PARAM}" && PROTO_PARAM=""
+		test -z "${OBFS}" && OBFS="plain"
+		test -z "${OBFS_PARAM}" && test $(echo ${OBFS} |grep -i 'http') && OBFS_PARAM="bing.com,microsoft.com,live.com,outlook.com"
 		prepare
 		install
 	elif test "$FLAG" == "uninstall" ; then
