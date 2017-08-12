@@ -28,5 +28,5 @@ bash -c "$(wget --no-check-certificate https://github.com/benzBrake/shadowsocks_
 ```
 #### Uninstall
 ```
-bash -c "$(wget --no-check-certificate https://github.com/benzBrake/Shell_Collections/raw/master/shadowsocksR_installer.sh -O -)" -c "-u"
+bash -c "$(wget --no-check-certificate https://github.com/benzBrake/shadowsocks_installer/raw/master/shadowsocksR_installer.sh -O -)" -c "-u"
 ```
