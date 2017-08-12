@@ -44,13 +44,13 @@ prepare() {
 			apt-get -y install debian-archive-keyring
 		fi
 		apt-get -y update
-		for packages in python python-dev python-pip python-m2crypto curl wget unzip gcc swig automake make perl cpio build-essential
+		for packages in python python-dev python-pip python-m2crypto curl wget unzip gcc automake make perl cpio build-essential
 		do
 			echo -e "|\n|   Notice: Installing required package '$packages' via 'apt-get'"
 			apt-get -y install $packages
 		done
 	elif [ -n "$(command -v yum)" ]; then 
-		for packages in unzip openssl-devel gcc swig python python-devel python-setuptools m2crypto autoconf libtool libevent automake make curl curl-devel zlib-devel perl perl-devel cpio expat-devel gettext-devel
+		for packages in unzip openssl-devel gcc python python-devel python-setuptools m2crypto autoconf libtool libevent automake make curl curl-devel zlib-devel perl perl-devel cpio expat-devel gettext-devel
 		do
 			echo -e "|\n|   Notice: Installing required package '$packages' via 'yum'"
 			yum -y install $packages
@@ -62,7 +62,7 @@ install() {
 	whereis libsodium.so 2>&1 | grep -i 'libsodium.so' >/dev/null
 	if [ $? -ne 0 ]; then
 		#Intall libsodium
-		wget --no-check-certificate -O libsodium-1.0.10.tar.gz https://github.com/jedisct1/libsodium/releases/download/1.0.10/libsodium-1.0.10.tar.gz
+		wget --no-check-certificate -O libsodium-1.0.10.tar.gz https://github.com/jedisct1/libsodium/releases/download/1.0.13/libsodium-1.0.13.tar.gz
 		tar -xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
 		./configure && make && make install
 		if [ $? -ne 0 ]; then
@@ -74,7 +74,7 @@ install() {
 	fi
 	#Install shadowsocksR
 	cd "$INSTALL_DIR"
-	if ! wget --no-check-certificate -O manyuser.zip https://github.com/breakwa11/shadowsocks/archive/manyuser.zip; then
+	if ! wget --no-check-certificate -O manyuser.zip https://github.com/shadowsocksr-backup/shadowsocksr/archive/manyuser.zip; then
 		echo "Failed to download ShadowsocksR file!"
 		exit 1
 	fi
@@ -83,7 +83,7 @@ install() {
 	rm -rf shadowsocksr-manyuser
 	if [ -f "${INSTALL_DIR}/${FOLDER}/server.py" ]; then
 		if [ -n "$(command -v apt-get)" ]; then
-			if ! wget --no-check-certificate https://raw.githubusercontent.com/Char1sma/Shell_Collections/master/shadowsocks_installer/shadowsocksR-debian -O /etc/init.d/shadowsocks; then
+			if ! wget --no-check-certificate https://raw.githubusercontent.com/benzBrake/shadowsocks_installer/master/shadowsocksR-debian -O /etc/init.d/shadowsocks; then
 				echo "Failed to download ShadowsocksR chkconfig file!"
 				exit 1
 			fi
@@ -91,7 +91,7 @@ install() {
 			chmod +x /etc/init.d/shadowsocks
 			update-rc.d -f shadowsocks defaults
 		elif [ -n "$(command -v yum)" ]; then 
-			if ! wget --no-check-certificate https://raw.githubusercontent.com/Char1sma/Shell_Collections/master/shadowsocks_installer/shadowsocksR -O /etc/init.d/shadowsocks; then
+			if ! wget --no-check-certificate https://raw.githubusercontent.com/benzBrake/shadowsocks_installer/master/shadowsocksR -O /etc/init.d/shadowsocks; then
 				echo "Failed to download ShadowsocksR chkconfig file!"
 				exit 1
 			fi
@@ -290,7 +290,7 @@ elif test "$ERROR" != "yes" ; then
 		test -f /etc/shadowsocks_uninstall && { echo -e "\033[41;37m [ERROR] \033[0m It seem that you have installed shadowsocksR!";exit 1; }
 		# Set ShadowsocksR install directory
 		if test -z "$DIRECTORY"; then
-			INSTALL_DIR=/usr/local
+			INSTALL_DIR=/etc
 		else
 			INSTALL_DIR=$(echo ${DIRECTORY} | sed 's#/$##')
 		fi
