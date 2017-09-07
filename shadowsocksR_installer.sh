@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+yum -y install head
+apt-get -y install head
 OS_VERSION=$(grep -oEh "[0-9]+" /etc/*-release | head -n 1) || {
 		cat >&2 <<-'EOF'
 		Fail to detect os version, please feed back to author!
@@ -62,8 +64,8 @@ install() {
 	whereis libsodium.so 2>&1 | grep -i 'libsodium.so' >/dev/null
 	if [ $? -ne 0 ]; then
 		#Intall libsodium
-		wget --no-check-certificate -O libsodium-1.0.10.tar.gz https://github.com/jedisct1/libsodium/releases/download/1.0.13/libsodium-1.0.13.tar.gz
-		tar -xf libsodium-1.0.10.tar.gz && cd libsodium-1.0.10
+		wget --no-check-certificate -O libsodium-1.0.13.tar.gz https://github.com/jedisct1/libsodium/releases/download/1.0.13/libsodium-1.0.13.tar.gz
+		tar -xf libsodium-1.0.13.tar.gz && cd libsodium-1.0.13
 		./configure && make && make install
 		if [ $? -ne 0 ]; then
 			echo "libsodium install failed!"
