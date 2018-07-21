@@ -46,7 +46,7 @@ prepare() {
 			apt-get -y install debian-archive-keyring
 		fi
 		apt-get -y update
-		for packages in python python-dev python-pip python-m2crypto curl wget unzip gcc automake make perl cpio build-essential
+		for packages in python python-dev python-pip python-m2crypto curl wget unzip gcc automake make perl cpio build-essential libssl-dev
 		do
 			echo -e "|\n|   Notice: Installing required package '$packages' via 'apt-get'"
 			apt-get -y install $packages
